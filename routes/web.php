@@ -15,8 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/frontend', function () {
-    return view('frontendpage');
+
+Route::get('/form/login', function () {
+    return view('APIlogin');
+});
+
+Route::get('/form/register', function () {
+    return view('APIregister');
 });
 
 Auth::routes();

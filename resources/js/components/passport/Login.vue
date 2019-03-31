@@ -2,7 +2,7 @@
     
         
             <div class="container">
-                <b>Username</b>
+                <b>Email</b>
                 <input type="text" v-model="email" placeholder="Enter Username"  required>
 
                 <b>Password</b>

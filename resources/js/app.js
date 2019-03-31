@@ -36,9 +36,15 @@ Vue.component(
     require('./components/passport/PersonalAccessTokens.vue').default
 );
 
+
 Vue.component(
-    'frontend',
-    require('./components/passport/FrontEnd.vue').default
+    'login',
+    require('./components/passport/Login.vue').default
+);
+
+Vue.component(
+    'register',
+    require('./components/passport/Register.vue').default
 );
 /**
  * Next, we will create a fresh Vue application instance and attach it to
