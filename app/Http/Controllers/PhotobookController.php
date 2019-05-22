@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Photobook;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 class PhotobookController extends Controller
 {
     public function index(){
@@ -95,23 +95,24 @@ class PhotobookController extends Controller
     }
 
     public function upload(Request $request){
-        // cache the file
-        $file = $request->file('file');
-  
-        // generate a new filename. getClientOriginalExtension() for the file extension
-        $filename = $file->getClientOriginalName();
-    
-        // save to storage/app/photos as the new $filename
-        $path = $file->storeAs('storage', $filename);
 
-        dd($path);
+        $this->validate($request, [
+            'file' => 'required|image|max:2048'
+        ]);
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $name = $file->getClientOriginalName();
+            $filePath = 'images/' . $name;
+            Storage::disk('s3')->put($filePath, file_get_contents($file));
+        }
+ 
+        return 'Image uploaded successfully';
       }
   
-      public function del(Request $request, $dfile){
-              unlink('../public/storage/'.$dfile);         
-              return "Fail berjaya dibuang";
-          
-          
+      public function del(Request $request, $file){
+        Storage::disk('s3')->delete('images/' . $file);
+
+        return 'Image was deleted successfully';
       }
 
 
