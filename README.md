@@ -1,2 +1,2 @@
-#Fullstack Laravel Vue JS App
+Fullstack Laravel Vue JS App
 
